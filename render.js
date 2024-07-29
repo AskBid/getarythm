@@ -39,7 +39,7 @@ button.setAttribute('onclick', "start_stop()")
 
 function start_stop() {
 	const inputBeatms = document.getElementById("beatms");
-	SWITCH = true;
+	SWITCH = SWITCH ? false : true;
 	counting(inputBeatms.value);
-	button.innerText = "STOP."
+	button.innerText = button.innerText == "STOP." ? 'START!' : "STOP.";
 }
