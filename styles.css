@@ -17,23 +17,42 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next row */
+    padding: 0px;
 }
 
 .cell {
     flex: 1; /* Each cell takes equal space */
     border: 1px solid #ccc;
     text-align: center;
-    padding: 10px;
-    /* height: 10vh; */
+    font-size: 39px;
+    color: #ff6666;
+    height: 10vh;
     aspect-ratio: 1 / 1; /* Width to height ratio */
 }
 
+.light {
+    background: yellow;
+}
+
+.lightsoft { background: #565d3e}
+
+#row2 .cell {background: #eee;}
+
 #console {
+    vertical-align: middle;
     height: 100px;
     margin: 20px;
+    padding: 50px;
 }
 
 #start_stop {
+    height: auto;
+    margin: 0px;
+    padding: 10px;
+}
+
+#tap {
+    width:300px;
     height: auto;
     margin: 0px;
     padding: 10px;
@@ -44,4 +63,9 @@ body {
     margin: 0px;
     padding: 10px;
 
+}
+
+svg {
+    height: 100%;
+    width: 100%;
 }

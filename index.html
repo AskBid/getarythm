@@ -9,31 +9,48 @@
 <body>
     <div class="container">
         <!-- First row -->
-        <div class="cell">1</div>
-        <div class="cell">+</div>
-        <div class="cell">2</div>
-        <div class="cell">+</div>
-        <div class="cell">3</div>
-        <div class="cell">+</div>
-        <div class="cell">4</div>
-        <div class="cell">+</div>
+        <div class="cell" id='1'>1</div>
+        <div class="cell" id='1+'>+</div>
+        <div class="cell" id='2'>2</div>
+        <div class="cell" id='2+'>+</div>
+        <div class="cell" id='3'>3</div>
+        <div class="cell" id='3+'>+</div>
+        <div class="cell" id='4'>4</div>
+        <div class="cell" id='4+'>+</div>
         <!-- ... Repeat for 8 cells ... -->
     </div>
-    <div class="container">
+    <div class="container" id='row2'>
         <!-- Second row -->
-        <div class="cell">9</div>
-        <div class="cell">10</div>
-        <div class="cell">11</div>
-        <div class="cell">3</div>
-        <div class="cell">3</div>
-        <div class="cell">3</div>
-        <div class="cell">3</div>
-        <div class="cell">3</div>
+        <div class="cell">
+            <svg id="1Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="1+Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="2Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="2+Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="3Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="3+Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="4Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="cell">
+            <svg id="4+Svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
         <!-- ... Repeat for 8 cells ... -->
     </div>
     <div id="console">
         <button type="button" id="start_stop">START!</button>
         <input type="text" id="beatms" value="120">
+        <button type="button" id="tap">TAP!</button>
     </div>
     <script src="render.js"></script>
 </body>
