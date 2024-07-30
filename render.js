@@ -34,6 +34,11 @@ async function counting(ms, thisSession) {
 	var counter = 0
 
 	while (SWITCH) {
+		const light = document.getElementById(thisSession.current)
+		const lightoff = document.getElementById(thisSession.bar[thisSession.current].prev)
+		light.setAttribute('class', "cell bordered")
+		lightoff.setAttribute('class', "cell")
+
 		const target_timestamp = Date.now() + (ms/2); //0 -> 50
 		// console.log(`target timestamp date for calc: ${target_timestamp-ms/2}`)
 		// console.log(`target timestamp ${ms/2} ${target_timestamp}`)
@@ -48,10 +53,7 @@ async function counting(ms, thisSession) {
 			lighttype = 'light'
 		}  
 		// console.log(`timestamp halfway (equal target?) ${Date.now()}`)
-		const lightoff = document.getElementById(thisSession.bar[thisSession.current].prev)
-		lightoff.setAttribute('class', "cell")
-		const light = document.getElementById(thisSession.current)
-		light.setAttribute('class', `cell ${lighttype}`)
+		light.setAttribute('class', `cell bordered ${lighttype}`)
 
 		// await render(start + (CRONJOB_INTERVAL*index), start)
 		// // problem! the OVB limit orders get accumulated over time.
@@ -88,13 +90,13 @@ function space_press(thisSession) {
 	const target_timestamp = thisSession.bar[thisSession.current].playing //50
 	const hit_delta = hit_timestamp - target_timestamp //33-50= -17
 	thisSession.bar[thisSession.current].hits.push(hit_delta) // -17
-	console.log(`current ${target_timestamp} ${thisSession.current}`)
-	console.log(`${target_timestamp - MILLISECONDS} - ${target_timestamp + MILLISECONDS}`)
-	console.log(Date.now())
+	// console.log(`current ${target_timestamp} ${thisSession.current}`)
+	// console.log(`${target_timestamp - MILLISECONDS} - ${target_timestamp + MILLISECONDS}`)
+	// console.log(Date.now())
 	const svg = document.getElementById(`${thisSession.current}Svg`)
 	drawHit(svg, hit_delta);
-	tapAudio.currentTime = 0;
-	tapAudio.play();
+	// tapAudio.currentTime = 0;
+	// tapAudio.pla
 }
 
 function drawHit(svg, hit_delta) {
@@ -102,7 +104,7 @@ function drawHit(svg, hit_delta) {
 	// svg.setAttribute('width', bbox.width);
 	// svg.setAttribute('height', bbox.height);
 	const circleprev = document.getElementById('circ')
-	console.log(circleprev)
+	// console.log(circleprev)
 	if (circleprev != null) {circleprev.remove()}
 	const svgWidth = svg.width.baseVal.value;
 	const svgHeight = svg.height.baseVal.value;
@@ -119,16 +121,16 @@ function drawHit(svg, hit_delta) {
 	circle.setAttribute("id", 'circ');
 	svg.appendChild(circle)
 
-	console.log(svgWidth);
-	console.log(svgHeight);
+	// console.log(svgWidth);
+	// console.log(svgHeight);
 	const tol = (MILLISECONDS * TOLLERANCE) / 2 // 100 * 0.5 = 50 / 2 = 25
 
 	// Step 3: Set attributes for the rectangle
 	rect.setAttribute('x', x); // -17 / 100 
-	console.log(`middle: ${middleX}`)
-	console.log(`width: ${svgWidth}`)
-	console.log(`pixs from middle: ${svgWidth * -0.17}`)
-	console.log(`pixs final: ${middleX + (svgWidth * -0.17)}`)
+	// console.log(`middle: ${middleX}`)
+	// console.log(`width: ${svgWidth}`)
+	// console.log(`pixs from middle: ${svgWidth * -0.17}`)
+	// console.log(`pixs final: ${middleX + (svgWidth * -0.17)}`)
 	rect.setAttribute('y', 0);
 	rect.setAttribute('height', svgHeight+50);
 	if (hit_delta >= (-tol) && hit_delta <= tol) {
