@@ -86,8 +86,8 @@ function start_stop() {
 function space_press(thisSession) {
 	const hit_timestamp = Date.now(); //33
 	const target_timestamp = thisSession.bar[thisSession.current].playing //50
-	const hit_delta = hit_timestamp - target_timestamp //33-50= 17
-	thisSession.bar[thisSession.current].hits.push(hit_delta) // 17
+	const hit_delta = hit_timestamp - target_timestamp //33-50= -17
+	thisSession.bar[thisSession.current].hits.push(hit_delta) // -17
 	console.log(`current ${target_timestamp} ${thisSession.current}`)
 	console.log(`${target_timestamp - MILLISECONDS} - ${target_timestamp + MILLISECONDS}`)
 	console.log(Date.now())
@@ -110,7 +110,11 @@ function drawHit(svg, hit_delta) {
 	const tol = (MILLISECONDS * TOLLERANCE) / 2 // 100 * 0.5 = 50 / 2 = 25
 
 	// Step 3: Set attributes for the rectangle
-	rect.setAttribute('x', middleX + (svgWidth * (hit_delta / (MILLISECONDS/2)))); // 17 / 100
+	rect.setAttribute('x', middleX + (svgWidth * (hit_delta / (MILLISECONDS)))); // -17 / 100 
+	console.log(`middle: ${middleX}`)
+	console.log(`width: ${svgWidth}`)
+	console.log(`pixs from middle: ${svgWidth * -0.17}`)
+	console.log(`pixs final: ${middleX + (svgWidth * -0.17)}`)
 	rect.setAttribute('y', 0);
 	rect.setAttribute('height', svgHeight+50);
 	if (hit_delta >= (-tol) && hit_delta <= tol) {
