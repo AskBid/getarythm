@@ -30,7 +30,8 @@ body {
 
 .cell {
     flex: 1; /* Each cell takes equal space */
-    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border: 3px solid #333;
     text-align: center;
     font-size: 39px;
     color: #ff6666;
@@ -44,7 +45,10 @@ body {
 
 .lightsoft { background: #565d3e}
 
-#row2 .cell {background: #eee;}
+#row2 .cell {
+    background: #eee;
+    border: 3px solid #fff;
+}
 
 #console {
     vertical-align: middle;
@@ -79,6 +83,6 @@ svg {
 }
 
 .bordered {
-    border: 2px solid pink;
+    border: 3px solid pink;
     box-sizing: border-box;
 }

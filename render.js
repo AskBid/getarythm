@@ -27,6 +27,9 @@ class Session {
 }
 
 var thisSession = new Session();
+var glassknock2 = new Audio('/home/marep/Downloads/glass-knock-4.wav');
+var glassknock = new Audio('/home/marep/Downloads/glass-knock-1.wav');
+var utopia = new Audio('/home/marep/Downloads/Utopia.WAV')
 var tapAudio = new Audio('/home/marep/Downloads/Pmiscck.wav');
 var glassAudio = new Audio('/home/marep/Downloads/Ptjunk.wav');
 
@@ -45,13 +48,14 @@ async function counting(ms, thisSession) {
 		thisSession.bar[thisSession.current].playing = target_timestamp;
 		// console.log(`equal to target for calc ${Date.now()}`)
 
-		await sleep((ms/2)-10) //50
+		await sleep((ms/2)-20) //50 -20 just because playing the file I reckn is delayed a little.
 		var lighttype = 'lightsoft'
 		if (counter % 2 == 0) {
 			glassAudio.currentTime = 0
-			glassAudio.play();
+			// thisSession.current == '1' ? glassknock2.play() : glassknock.play();
+			glassknock.play();
 			lighttype = 'light'
-		}  
+		}  else {thisSession.current == '4+' ? glassAudio.play() : null}
 		// console.log(`timestamp halfway (equal target?) ${Date.now()}`)
 		light.setAttribute('class', `cell bordered ${lighttype}`)
 
@@ -126,7 +130,7 @@ function drawHit(svg, hit_delta) {
 	const tol = (MILLISECONDS * TOLLERANCE) / 2 // 100 * 0.5 = 50 / 2 = 25
 
 	// Step 3: Set attributes for the rectangle
-	rect.setAttribute('x', x); // -17 / 100 
+	rect.setAttribute('x', x-2); // -17 / 100 
 	// console.log(`middle: ${middleX}`)
 	// console.log(`width: ${svgWidth}`)
 	// console.log(`pixs from middle: ${svgWidth * -0.17}`)
@@ -134,11 +138,11 @@ function drawHit(svg, hit_delta) {
 	rect.setAttribute('y', 0);
 	rect.setAttribute('height', svgHeight+50);
 	if (hit_delta >= (-tol) && hit_delta <= tol) {
-		rect.setAttribute('width', 3);
+		rect.setAttribute('width', 4);
 		rect.setAttribute('fill', 'green');
 		rect.setAttribute('fill-opacity', 0.5);
 	} else {
-		rect.setAttribute('width', 2);
+		rect.setAttribute('width', 4);
 		rect.setAttribute('fill', 'red');
 		rect.setAttribute('fill-opacity', 0.3);
 	}
