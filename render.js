@@ -101,16 +101,30 @@ function drawHit(svg, hit_delta) {
 	// var bbox = svg.getBBox();
 	// svg.setAttribute('width', bbox.width);
 	// svg.setAttribute('height', bbox.height);
+	const circleprev = document.getElementById('circ')
+	console.log(circleprev)
+	if (circleprev != null) {circleprev.remove()}
 	const svgWidth = svg.width.baseVal.value;
 	const svgHeight = svg.height.baseVal.value;
 	const middleX = svgWidth / 2;
 	var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+	const circle = document.createElementNS('http://www.w3.org/2000/svg', "circle");
+	const x = middleX + (svgWidth * (hit_delta / (MILLISECONDS)))
+        // Set the circle's attributes
+        circle.setAttribute("cx", x); // x-coordinate of the center
+        circle.setAttribute("cy", svgHeight); // y-coordinate of the center
+        circle.setAttribute("r", 10);   // radius
+        circle.setAttribute("fill", "yellow"); // fill color
+	circle.setAttribute("id", 'circ');
+	svg.appendChild(circle)
+
 	console.log(svgWidth);
 	console.log(svgHeight);
 	const tol = (MILLISECONDS * TOLLERANCE) / 2 // 100 * 0.5 = 50 / 2 = 25
 
 	// Step 3: Set attributes for the rectangle
-	rect.setAttribute('x', middleX + (svgWidth * (hit_delta / (MILLISECONDS)))); // -17 / 100 
+	rect.setAttribute('x', x); // -17 / 100 
 	console.log(`middle: ${middleX}`)
 	console.log(`width: ${svgWidth}`)
 	console.log(`pixs from middle: ${svgWidth * -0.17}`)
