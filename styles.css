@@ -51,31 +51,29 @@ body {
 }
 
 #console {
+    box-sizing: border-box;
+    display: flex;
+    flex: 2;
+    flex-direction: column;
     vertical-align: middle;
-    height: 100px;
-    margin: 20px;
-    padding: 50px;
-}
-
-#start_stop {
-    height: auto;
-    margin: 0px;
     padding: 10px;
 }
 
-#tap {
-    width:300px;
-    height: auto;
-    margin: 0px;
-    padding: 10px;
+#tapColumn {
+    flex: 5;
+    padding: 35px
 }
 
-#beatms {
-    height:auto;
-    margin: 0px;
-    padding: 10px;
-
+#infoColumn {
+    flex: 4;
 }
+
+/* #start_stop, #blind { */
+/*     height: auto; */
+/*     margin: 0px; */
+/*     padding: 10px; */
+/* } */
+
 
 svg {
     height: 100%;
@@ -85,4 +83,51 @@ svg {
 .bordered {
     border: 3px solid pink;
     box-sizing: border-box;
+}
+
+.round-button {
+    display:block;
+    width:380px;
+    height:380px;
+    line-height:80px;
+    border: 3px solid #f5f5f5;
+    border-radius: 50%;
+    color:#ffbbee;
+    text-align:center;
+    vertical-align: middle;
+    text-decoration:none;
+    background: #555777;
+    box-shadow: 0 0 3px gray;
+    font-size:55px;
+    font-weight:bold;
+}
+
+.round-button:hover {
+    background: #999bbb;
+    border: 5px solid #ff77ff;
+}
+
+.round-button:active {
+    background: #fff;
+    border: 5px solid #ff44bb
+}
+
+button, input{
+    font-size: 0.9em;
+    padding: 10px;
+    margin: 2px 35px 10px 35px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.buttonMode {
+    font-weight: 100;
+    font-size: 0.76em;
+}
+
+label {
+    padding: 5px;
+    margin: 15px 35px 2px 35px;
+    color: white;
 }

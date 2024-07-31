@@ -1,6 +1,7 @@
 var SWITCH = false;
 var MILLISECONDS; // for half a beat so whole 1 period, whole 1+ period, whole 2 period ... 
 var TOLLERANCE = 0.5
+var MODE = 2
 
 
 class Session {
@@ -39,7 +40,7 @@ async function counting(ms, thisSession) {
 	while (SWITCH) {
 		const light = document.getElementById(thisSession.current)
 		const lightoff = document.getElementById(thisSession.bar[thisSession.current].prev)
-		light.setAttribute('class', "cell bordered")
+		MODE >1 ? light.setAttribute('class', "cell bordered") : null;
 		lightoff.setAttribute('class', "cell")
 
 		const target_timestamp = Date.now() + (ms/2); //0 -> 50
@@ -51,13 +52,13 @@ async function counting(ms, thisSession) {
 		await sleep((ms/2)-20) //50 -20 just because playing the file I reckn is delayed a little.
 		var lighttype = 'lightsoft'
 		if (counter % 2 == 0) {
-			glassAudio.currentTime = 0
+			glassknock.currentTime = 0
 			// thisSession.current == '1' ? glassknock2.play() : glassknock.play();
 			glassknock.play();
 			lighttype = 'light'
-		}  else {thisSession.current == '4+' ? glassAudio.play() : null}
+		}  else if (thisSession.current == '4+') {glassAudio.currentTime = 0; glassAudio.play()}
 		// console.log(`timestamp halfway (equal target?) ${Date.now()}`)
-		light.setAttribute('class', `cell bordered ${lighttype}`)
+		MODE > 1 ? light.setAttribute('class', `cell bordered ${lighttype}`) : null;
 
 		// await render(start + (CRONJOB_INTERVAL*index), start)
 		// // problem! the OVB limit orders get accumulated over time.
@@ -77,6 +78,14 @@ function sleep(ms) {
 
 const button = document.getElementById('start_stop')
 button.setAttribute('onclick', "start_stop()")
+
+const buttonBlind = document.getElementById('blind')
+buttonBlind.setAttribute('onclick', "blind()")
+
+function blind() {
+	MODE = MODE > 1 ? 1 : 2;
+	buttonBlind.innerText = buttonBlind.innerText == "SOUND ONLY" ? 'WITH VISUALS' : "SOUND ONLY";
+}
 
 const tap = document.getElementById('tap')
 tap.setAttribute('onclick', "space_press(thisSession)")

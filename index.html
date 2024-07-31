@@ -48,10 +48,22 @@
         </div>
         <!-- ... Repeat for 8 cells ... -->
     </div>
-    <div id="console">
-        <button type="button" id="start_stop">START!</button>
-        <input type="text" id="beatms" value="80">
-        <button type="button" id="tap">TAP!</button>
+    <div class="container">
+        <div id="console">
+            <label>Beats per minute:</label>
+            <input type="text" id="beatms" value="80"><br>
+            <button type="button" id="start_stop">START!</button>
+            <button type="button" id="start_stop" disabled>Clear</button>
+            <label>Mode:</label>
+            <button type="button" id="blind" class="buttonMode">SOUND w/ VISUALS</button>
+            <button type="button" id="blind" class="buttonMode">ONLY SOUNDS</button>
+            <button type="button" id="blind" class="buttonMode">ONLY VISUALS</button>
+        </div>
+        <div id="tapColumn">
+            <button type="button" class="round-button" id="tap"><i>TAP!<br>to catch a beat!</i><br><br><br></button>
+        </div>
+        <div id="infoColumn">
+        </div>
     </div>
     <script src="render.js"></script>
 </body>
