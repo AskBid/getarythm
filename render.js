@@ -1,7 +1,8 @@
 var SWITCH = false;
 var MILLISECONDS; // for half a beat so whole 1 period, whole 1+ period, whole 2 period ... 
-var TOLLERANCE = 0.5
-var MODE = 2
+var TOLLERANCE = 0.5;
+var MODE = 2;
+var TAPAUDIO = true;
 
 
 class Session {
@@ -79,8 +80,8 @@ function sleep(ms) {
 const button = document.getElementById('start_stop')
 button.setAttribute('onclick', "start_stop()")
 
-const buttonBlind = document.getElementById('blind')
-buttonBlind.setAttribute('onclick', "blind()")
+// const buttonBlind = document.getElementById('blind')
+// buttonBlind.setAttribute('onclick', "blind()")
 
 function blind() {
 	MODE = MODE > 1 ? 1 : 2;
@@ -108,8 +109,10 @@ function space_press(thisSession) {
 	// console.log(Date.now())
 	const svg = document.getElementById(`${thisSession.current}Svg`)
 	drawHit(svg, hit_delta);
-	// tapAudio.currentTime = 0;
-	// tapAudio.pla
+	if (TAPAUDIO) {
+		glassknock2.currentTime = 0;
+		glassknock2.play()
+	}
 }
 
 function drawHit(svg, hit_delta) {
