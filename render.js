@@ -1,7 +1,8 @@
 var SWITCH = false;
 var MILLISECONDS; // for half a beat so whole 1 period, whole 1+ period, whole 2 period ... 
 var TOLLERANCE = 0.5;
-var MODE = 2;
+var BEATVISUALS = 2;
+var BEATSOUNDS = false
 var TAPAUDIO = true;
 
 
@@ -29,7 +30,7 @@ class Session {
 }
 
 var thisSession = new Session();
-var glassknock2 = new Audio('/home/marep/Downloads/glass-knock-4.wav');
+var glassknock2 = new Audio('/home/marep/Downloads/glass-knock-4(1).wav');
 var glassknock = new Audio('/home/marep/Downloads/glass-knock-1.wav');
 var utopia = new Audio('/home/marep/Downloads/Utopia.WAV')
 var tapAudio = new Audio('/home/marep/Downloads/Pmiscck.wav');
@@ -41,7 +42,7 @@ async function counting(ms, thisSession) {
 	while (SWITCH) {
 		const light = document.getElementById(thisSession.current)
 		const lightoff = document.getElementById(thisSession.bar[thisSession.current].prev)
-		MODE >1 ? light.setAttribute('class', "cell bordered") : null;
+		BEATVISUALS > 1 ? light.setAttribute('class', "cell bordered") : null;
 		lightoff.setAttribute('class', "cell")
 
 		const target_timestamp = Date.now() + (ms/2); //0 -> 50
@@ -50,16 +51,17 @@ async function counting(ms, thisSession) {
 		thisSession.bar[thisSession.current].playing = target_timestamp;
 		// console.log(`equal to target for calc ${Date.now()}`)
 
-		await sleep((ms/2)-20) //50 -20 just because playing the file I reckn is delayed a little.
+		await sleep((ms/2)-4) //-4 just because playing the file I reckn is delayed a little.
 		var lighttype = 'lightsoft'
 		if (counter % 2 == 0) {
-			glassknock.currentTime = 0
-			// thisSession.current == '1' ? glassknock2.play() : glassknock.play();
-			glassknock.play();
+			if (BEATSOUNDS) {
+				glassknock.currentTime = 0;
+				glassknock.play();
+			}
 			lighttype = 'light'
 		}  else if (thisSession.current == '4+') {glassAudio.currentTime = 0; glassAudio.play()}
 		// console.log(`timestamp halfway (equal target?) ${Date.now()}`)
-		MODE > 1 ? light.setAttribute('class', `cell bordered ${lighttype}`) : null;
+		BEATVISUALS > 1 ? light.setAttribute('class', `cell bordered ${lighttype}`) : null;
 
 		// await render(start + (CRONJOB_INTERVAL*index), start)
 		// // problem! the OVB limit orders get accumulated over time.
@@ -77,15 +79,39 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const button = document.getElementById('start_stop')
+var button = document.getElementById('start_stop')
 button.setAttribute('onclick', "start_stop()")
 
-// const buttonBlind = document.getElementById('blind')
-// buttonBlind.setAttribute('onclick', "blind()")
+button = document.getElementById('beatvisuals')
+button.setAttribute('onclick', "switchMode('beatvisuals')")
 
-function blind() {
-	MODE = MODE > 1 ? 1 : 2;
-	buttonBlind.innerText = buttonBlind.innerText == "SOUND ONLY" ? 'WITH VISUALS' : "SOUND ONLY";
+button = document.getElementById('beatsounds')
+button.setAttribute('onclick', "switchMode('beatsounds')")
+
+button = document.getElementById('tapsound')
+button.setAttribute('onclick', "switchMode('tapsound')")
+
+button = document.getElementById('clear')
+button.setAttribute('onclick', "clearRects()")
+
+   
+function switchMode(id) {
+	switch(id) {
+	  case 'beatvisuals':
+	    BEATVISUALS = BEATVISUALS > 1 ? 1 : 2;
+	    break;
+	  case 'beatsounds':
+	    BEATSOUNDS = BEATSOUNDS ? false : true;
+	    break;
+	  case 'tapsound':
+	    TAPAUDIO = TAPAUDIO ? false : true;
+	    break;
+	  default:
+	    // code block
+	    break;
+	}
+	const button = document.getElementById(id)
+	button.innerText = button.innerText == "OFF" ? 'ON' : "OFF";
 }
 
 const tap = document.getElementById('tap')
@@ -94,8 +120,9 @@ tap.setAttribute('onclick', "space_press(thisSession)")
 function start_stop() {
 	const inputBeatms = document.getElementById("beatms");
 	SWITCH = SWITCH ? false : true;
-	MILLISECONDS = ((60 / inputBeatms.value) * 1000)/2
+	MILLISECONDS = ((60 / inputBeatms.value) * 1000)/2;
 	counting(MILLISECONDS, thisSession);
+	button = document.getElementById('start_stop');
 	button.innerText = button.innerText == "STOP." ? 'START!' : "STOP.";
 }
 
@@ -132,7 +159,7 @@ function drawHit(svg, hit_delta) {
         // Set the circle's attributes
         circle.setAttribute("cx", x); // x-coordinate of the center
         circle.setAttribute("cy", svgHeight); // y-coordinate of the center
-        circle.setAttribute("r", 10);   // radius
+        circle.setAttribute("r", 50);   // radius
         circle.setAttribute("fill", "yellow"); // fill color
 	circle.setAttribute("id", 'circ');
 	svg.appendChild(circle)
@@ -163,4 +190,6 @@ function drawHit(svg, hit_delta) {
 	svg.appendChild(rect);
 }
 
-
+function clearRects() {
+	Array.from(document.getElementsByTagName('rect')).forEach(e => e.remove())
+}
