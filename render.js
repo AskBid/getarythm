@@ -30,11 +30,11 @@ class Session {
 }
 
 var thisSession = new Session();
-var glassknock2 = new Audio('glass-knock-4(1).wav');
-var glassknock = new Audio('/home/marep/Downloads/glass-knock-1.wav');
+var glassknock2 = new Audio('https://github.com/AskBid/getarythm/raw/main/glass-knock-4(1).wav');
+var glassknock = new Audio('https://github.com/AskBid/getarythm/raw/main/glass-knock-1.wav');
 var utopia = new Audio('/home/marep/Downloads/Utopia.WAV')
 var tapAudio = new Audio('/home/marep/Downloads/Pmiscck.wav');
-var glassAudio = new Audio('Ptjunk.wav');
+var glassAudio = new Audio('https://github.com/AskBid/getarythm/raw/main/Ptjunk.wav');
 
 async function counting(ms, thisSession) {
 	var counter = 0
