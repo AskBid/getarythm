@@ -30,11 +30,11 @@ class Session {
 }
 
 var thisSession = new Session();
-var glassknock2 = new Audio('/home/marep/Downloads/glass-knock-4(1).wav');
+var glassknock2 = new Audio('glass-knock-4(1).wav');
 var glassknock = new Audio('/home/marep/Downloads/glass-knock-1.wav');
 var utopia = new Audio('/home/marep/Downloads/Utopia.WAV')
 var tapAudio = new Audio('/home/marep/Downloads/Pmiscck.wav');
-var glassAudio = new Audio('/home/marep/Downloads/Ptjunk.wav');
+var glassAudio = new Audio('Ptjunk.wav');
 
 async function counting(ms, thisSession) {
 	var counter = 0
@@ -130,7 +130,7 @@ function space_press(thisSession) {
 	const hit_timestamp = Date.now(); //33
 	const target_timestamp = thisSession.bar[thisSession.current].playing //50
 	const hit_delta = hit_timestamp - target_timestamp //33-50= -17
-	thisSession.bar[thisSession.current].hits.push(hit_delta) // -17
+	// thisSession.bar[thisSession.current].hits.push(hit_delta) // -17
 	// console.log(`current ${target_timestamp} ${thisSession.current}`)
 	// console.log(`${target_timestamp - MILLISECONDS} - ${target_timestamp + MILLISECONDS}`)
 	// console.log(Date.now())

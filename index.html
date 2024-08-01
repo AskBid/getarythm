@@ -7,7 +7,7 @@
    
 </head>
 <body>
-    <div id='title'>GeTaRythm!</div>
+    <div id='title'>GeTaBeat!</div>
     <div class="container">
         <!-- First row -->
         <div class="cell" id='1'>1</div>
@@ -49,6 +49,11 @@
         <!-- ... Repeat for 8 cells ... -->
     </div>
     <div class="container">
+        <div id="infoColumn">
+        </div>
+        <div id="tapColumn">
+            <button type="button" class="round-button" id="tap"><i>TAP!<br>to catch a beat!</i><br><br><br></button>
+        </div>
         <div id="console">
             <label>Beats per minute:</label>
             <input type="text" id="beatms" value="80"><br>
@@ -60,11 +65,6 @@
             <button type="button" id="beatsounds" class="buttonMode">OFF</button>
             <label>Tap sound:</label>
             <button type="button" id="tapsound" class="buttonMode">ON</button>
-        </div>
-        <div id="tapColumn">
-            <button type="button" class="round-button" id="tap"><i>TAP!<br>to catch a beat!</i><br><br><br></button>
-        </div>
-        <div id="infoColumn">
         </div>
     </div>
     <script src="render.js"></script>
